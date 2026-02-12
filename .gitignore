@@ -1,0 +1,48 @@
+# =========================
+# HDL / Simulation outputs
+# =========================
+*.vcd
+*.vvp
+*.wlf
+*.vstf
+
+# Logs
+*.log
+
+# ModelSim / Questa
+work/
+transcript
+vsim.wlf
+
+# =========================
+# Xilinx Vivado (generated)
+# =========================
+*.jou
+*.str
+.Xil/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+
+# =========================
+# Intel Quartus (generated)
+# =========================
+*.rpt
+*.sof
+*.pof
+db/
+incremental_db/
+output_files/
+
+# =========================
+# OS / Editor temp files
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*~
+*.tmp
+*.bak
+*.old
