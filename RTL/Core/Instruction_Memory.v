@@ -1,5 +1,5 @@
 module Instruction_Memory #(
-    parameter MEM_INIT_FILE = "program.hex"
+    parameter MEM_INIT_FILE = "program.mem"
 )(
     input [31:0]        instr_addr,
     output [31:0]       instr

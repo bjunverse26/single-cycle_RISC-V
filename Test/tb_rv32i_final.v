@@ -30,7 +30,7 @@ module tb_rv32i_final;
     );
 
     Instruction_Memory #(
-        .MEM_INIT_FILE("program.hex")
+        .MEM_INIT_FILE("program.mem")
     ) u_imem (
         .instr_addr(instr_addr),
         .instr(instr)

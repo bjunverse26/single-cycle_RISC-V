@@ -1,7 +1,7 @@
 module RV32I_Top(
     input clk,
     input reset_btn,
-    output [3:0] led
+    output dummy_out
 );
 
 wire reset_n;
@@ -17,9 +17,17 @@ wire [2:0]  load_type;
 wire [31:0] write_data;
 
 assign reset_n = ~reset_btn;
-assign led = instr_addr[5:2];
 
-RV32I_Core u_core (
+reg [31:0] sink;
+always @(posedge clk or negedge reset_n) begin
+    if(!reset_n) sink <= 32'd0;
+    else sink <= sink ^ instr ^ instr_addr ^ read_data ^ data_mem_addr ^ write_data
+                 ^ {30'd0, data_mem_write, data_mem_read};
+end
+
+assign dummy_out = sink[0];
+
+(* DONT_TOUCH = "TRUE" *) RV32I_Core u_core (
     .clk(clk),
     .reset_n(reset_n),
     .instr(instr),
@@ -33,14 +41,14 @@ RV32I_Core u_core (
     .write_data(write_data)
 );
 
-Instruction_Memory #(
-    .MEM_INIT_FILE("program.hex")
+(* DONT_TOUCH = "TRUE" *) Instruction_Memory #(
+    .MEM_INIT_FILE("program.mem")
 ) u_imem (
     .instr_addr(instr_addr),
     .instr(instr)
 );
 
-Data_Memory u_dmem (
+(* DONT_TOUCH = "TRUE" *) Data_Memory u_dmem (
     .clk(clk),
     .data_mem_write(data_mem_write),
     .data_mem_read(data_mem_read),
